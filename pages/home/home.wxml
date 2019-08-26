@@ -1,0 +1,5 @@
+<!--logs.wxml-->
+<view class="container log-list">
+<wxs src="../../filter/filter.wxs" module="filter"></wxs>
+<view>{{filter.formatPrice(num)}}</view>
+</view>

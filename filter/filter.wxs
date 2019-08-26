@@ -1,0 +1,7 @@
+//这里写一些过滤器
+var formatPrice = function(num){
+  return '￥'+num;
+}
+module.exports = {
+  formatPrice: formatPrice
+}
