@@ -1,5 +1,5 @@
 <!--logs.wxml-->
-<view class="container log-list">
+<view class="container">
 <wxs src="../../filter/filter.wxs" module="filter"></wxs>
 <view class="header">
     <view class="title center-text">水族达人</view>
