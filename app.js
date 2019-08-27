@@ -41,5 +41,6 @@ App({
   globalData: {
     userInfo: null,
     code:'',
+    list:[],//
   }
 })

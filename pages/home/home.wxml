@@ -13,10 +13,8 @@
     </scroll-view>
     </view>
     <view class="all-item row flex-item flex-justify-start">
-        <view class="select-all">全部</view>
-        <view class="search-title">鉴赏讨论</view>
-        <view class="search-title">交易信息</view>
-        <view class="search-title">求助达人</view>
+        <view class="select-all" bindtap="handleSelectAll">全部</view>
+        <view wx:for="{{selectList}}" wx:for-index="idx" wx:for-item="selectItem" wx:key="idx" class="search-title {{selectItem.select?'active':''}}" data-current="{{idx}}" bindtap="handleSelect" >{{selectItem.text}}</view>
     </view>
     <view class="fill-bank"></view>
     <i-video test="{{test}}" bind:myevent="changeFn"></i-video>

@@ -9,6 +9,7 @@
     </view>
     <view class="play-module">
      <image src="http://pic25.nipic.com/20121112/9252150_150552938000_2.jpg" class="play-img"></image>
+     <image src="/image/play-btn.png" class="play-btn" bindtap="handleGoVideoDetailPage"></image>
     </view>
     <view class="text-moudle">
         人家把树林搬进鱼缸了，香槟木草缸造景，就是这么有腔调

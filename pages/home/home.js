@@ -36,6 +36,20 @@ Page({
                 text: '下课'
             }
         ],
+        selectList:[
+            {
+                text:'鉴赏讨论',
+                select:false
+            },
+            {
+                text:'交易信息',
+                select:false
+            },
+            {
+                text:'求助达人',
+                select:false
+            }
+        ],
         currentTab: 0,
         navScrollLeft: 0,
         windowHeight:0,
@@ -52,31 +66,38 @@ Page({
         this.init();
     },
     async init(){
+        //这个是小程序的bug
+        wx.setBackgroundColor({
+            backgroundColor: '#ffffff', // 窗口的背景色为白色
+        });
         await showLoading();
+        //获取信息
         wx.getSystemInfo({
             success: async (res)=>{
                 // 高度,宽度 单位为px
-                this.setData({
-                    windowHeight: res.windowHeight,
-                    windowWidth: res.windowWidth
-                })
+                this.setData({windowHeight: res.windowHeight,windowWidth: res.windowWidth})
             }
         });
         let [err,data]=await getMyLabel({}); //获取头部标签信息
-        if(err!=null){wx.showToast({title: err})};
+        if(err!=null){wx.showToast({title: '系统错误'})};
         await this.getPageInfoWithParam({});
-        await hideLoading();
+        // await hideLoading();
     },
     //获取页面信息 根据参数
     async getPageInfoWithParam(param){
         let [err,data]=await getIndexInfo(param);
-        if(err!=null){wx.showToast({title: err})};
+        if(err!=null){wx.showToast({title:'系统错误'})};
     },
     onReady(){
       //页面渲染完成
     },
     onShow(){
       //页面显示
+        if(typeof this.getTabBar === 'function' && this.getTabBar()){
+            this.getTabBar().setData({
+               selected:0
+            })
+        }
     },
     onHide(){
       //页面影藏
@@ -115,6 +136,34 @@ Page({
             })
         }
     },
+    handleSelect(e){
+        console.log('e==>',e.currentTarget.dataset.current)
+        let index=e.currentTarget.dataset.current;
+        this.data.selectList[index].select=!this.data.selectList[index].select;
+        this.setData({
+            selectList:[...this.data.selectList]
+        })
+    },
+    handleSelectAll() {
+        console.log('handelSelect is all')
+        this.setData({
+            selectList:[
+                {
+                    text:'鉴赏讨论',
+                    select:true
+                },
+                {
+                    text:'交易信息',
+                    select:true
+                },
+                {
+                    text:'求助达人',
+                    select:true
+                }
+            ]
+        })
+    }
+    ,
     changeFn(e){
         console.log('e==>',e.detail);
     }

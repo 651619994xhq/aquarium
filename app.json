@@ -1,6 +1,8 @@
 {
   "pages": [
     "pages/home/home",
+    "pages/mine/index",
+    "pages/videoDetail/index",
     "pages/index/index",
     "pages/logs/logs"
   ],
@@ -11,5 +13,24 @@
     "navigationBarTextStyle": "black",
     "backgroundColor": "white"
   },
+  "tabBar": {
+    "custom": true,
+    "color": "#ffffff",
+    "selectedColor": "#000000",
+    "backgroundColor": "#000000",
+    "list": [{
+      "pagePath": "pages/home/home",
+      "iconPath":"/image/dis-home-page.png",
+      "selectedIconPath":"/image/home-page.png",
+      "text": "首页"
+    },
+      {
+        "pagePath": "pages/mine/index",
+        "iconPath":"/image/dis-person.png",
+        "selectedIconPath":"/image/person.png",
+        "text": "我的"
+      }]
+  },
+  "usingComponents": {},
   "sitemapLocation": "sitemap.json"
 }

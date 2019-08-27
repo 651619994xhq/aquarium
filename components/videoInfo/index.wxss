@@ -42,6 +42,16 @@
 .play-module{
     width: 100%;
     height: 414rpx;
+    position: relative;
+}
+.play-btn{
+    position: absolute;
+    top: 163rpx;
+    left: 331rpx;
+    width: 88rpx;
+    height: 88rpx;
+    display: block;
+
 }
 .play-img{
     display: block;

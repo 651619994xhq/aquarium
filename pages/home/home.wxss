@@ -85,6 +85,9 @@ page{
     color: #B8C2CC;
 
 }
+.search-title.active{
+    color: blue;
+}
 .fill-bank{
     width: 100%;
     height: 316rpx;
