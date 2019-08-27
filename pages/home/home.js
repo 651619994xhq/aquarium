@@ -5,6 +5,7 @@ import {getMyLabel,getIndexInfo} from '../../utils/service'
 import {hideLoading, showLoading} from '../../utils/http';
 Page({
     data: {
+        test:'123',
         num:10,
         navData:[
             {
@@ -114,4 +115,7 @@ Page({
             })
         }
     },
+    changeFn(e){
+        console.log('e==>',e.detail);
+    }
 })

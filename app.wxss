@@ -3,12 +3,12 @@ body,html{
   background: #ededed;
   font-size: 16px;
 }
-.flex {
+.row {
   display: flex;
 }
-
-.column {
-  flex-direction: column
+.col {
+  display: flex;
+  flex-direction: column;
 }
 
 .flex-item {
@@ -48,3 +48,4 @@ body,html{
 .center-text{
   text-align: center;
 }
+

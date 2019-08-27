@@ -12,13 +12,14 @@
         </block>
     </scroll-view>
     </view>
-    <view class="all-item flex flex-item flex-justify-start">
+    <view class="all-item row flex-item flex-justify-start">
         <view>全部</view>
         <view>鉴赏讨论</view>
         <view>交易信息</view>
         <view>求助达人</view>
     </view>
     <view class="fill-bank"></view>
+    <i-video test="{{test}}" bind:myevent="changeFn"></i-video>
 <!--    <loading hidden="{{hidden}}" bindchange="loadingChange">-->
 <!--        加载中...-->
 <!--    </loading>-->

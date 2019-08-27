@@ -1,0 +1,18 @@
+<view class="video-info">
+<!--    this is videoInfo{{test}}-->
+<!--    <button bindtap="onTap">点击</button>-->
+<!--    {{test}}-->
+    <view class="header row flex-item flex-justify-start">
+<!--        <image  src="{{userImg}}" mode="cover" class="header-img flex"></image>-->
+        <view class="header-info  col flex-item flex-justify">
+            321321321
+<!--            <view>开心水族馆</view>-->
+<!--            <view>12小时前 - 1231浏览</view>-->
+        </view>
+        <view class="header-info">
+            开心
+<!--            <view>开心水族馆</view>-->
+<!--            <view>12小时前 - 1231浏览</view>-->
+        </view>
+    </view>
+</view>

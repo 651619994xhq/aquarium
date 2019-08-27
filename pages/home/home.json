@@ -1,5 +1,7 @@
 {
-  "usingComponents": {},
+  "usingComponents": {
+    "i-video": "/components/videoInfo/index"
+  },
   "navigationBarBackgroundColor": "#008AFF",
   "navigationBarTextStyle": "white",
   "navigationBarTitleText": "首页",
