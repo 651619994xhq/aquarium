@@ -1,4 +1,6 @@
 //app.js
+//这里是让小程序 支持 async await 语法的
+const regeneratorRuntime = require('./utils/runtime')
 App({
   onLaunch: function () {
     // 展示本地存储能力

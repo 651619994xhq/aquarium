@@ -1,10 +1,50 @@
 /**app.wxss**/
-.container {
-  height: 100%;
+body,html{
+  background: #ededed;
+  font-size: 16px;
+}
+.flex {
   display: flex;
-  flex-direction: column;
+}
+
+.column {
+  flex-direction: column
+}
+
+.flex-item {
   align-items: center;
+}
+
+.flex-item-end {
+  align-items: flex-end;
+}
+.flex-item-start {
+  align-items: flex-start;
+}
+
+.flex-justify {
+  justify-content: center;
+}
+.flex-justify-start {
+  justify-content:  flex-start;
+}
+
+.flex-justify-around {
+  justify-content: space-around;
+}
+
+.flex-justify-end{
+  justify-content: flex-end;
+}
+
+.flex-justify-between{
   justify-content: space-between;
-  padding: 200rpx 0;
-  box-sizing: border-box;
-} 
+}
+
+.flex-grow {
+  flex: 1;
+}
+
+.center-text{
+  text-align: center;
+}

@@ -22,5 +22,6 @@ export default {
     DETAIL:'/api.php/index/detail', //详情
     UPLOAD_FILE:'/api.php/index/uploadFile', //文件上传接口
     FANS:'/api.php/user/fans', //用户粉丝列表
+    TEST:'/manage/scope/login/getUserInfo'
 
 }

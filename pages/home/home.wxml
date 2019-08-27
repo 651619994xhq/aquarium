@@ -1,5 +1,44 @@
 <!--logs.wxml-->
 <view class="container log-list">
 <wxs src="../../filter/filter.wxs" module="filter"></wxs>
-<view>{{filter.formatPrice(num)}}</view>
+<view class="header">
+    <view class="title center-text">水族达人</view>
+    <scroll-view scroll-x="true" class="nav" scroll-left="{{navScrollLeft}}" scroll-with-animation="{{true}}">
+        <block wx:for="{{navData}}" wx:for-index="idx" wx:for-item="navItem" wx:key="idx">
+            <view class="nav-item {{currentTab == idx ?'active':''}}"  data-current="{{idx}}" bindtap="switchNav">
+                <view>{{navItem.text}}</view>
+                 <view class="nav-item-bottom" wx-if="{{currentTab == idx}}"></view>
+            </view>
+        </block>
+    </scroll-view>
+    </view>
+    <view class="all-item flex flex-item flex-justify-start">
+        <view>全部</view>
+        <view>鉴赏讨论</view>
+        <view>交易信息</view>
+        <view>求助达人</view>
+    </view>
+    <view class="fill-bank"></view>
+<!--    <loading hidden="{{hidden}}" bindchange="loadingChange">-->
+<!--        加载中...-->
+<!--    </loading>-->
+<!--    <scroll-view scroll-y="true" style="height: 100%;" bindscrolltolower="loadMore" bindscrolltoupper="refesh">-->
+<!--        <view wx:if="{{hasRefesh}}" style="display: flex;flex-direction: row;align-items: center;align-self: center;justify-content: center;">-->
+<!--            <icon type="waiting" size="45"/><text>刷新中...</text></view>-->
+<!--        <view wx:else style="display:none" ><text></text></view>-->
+<!--        <view class="lll" wx:for="{{list}}" wx:for-item="item" bindtap="bindViewTap"-->
+<!--              data-title="{{item.title}}" >-->
+<!--            <image style=" width: 50px;height: 50px;margin: 20rpx;" src="{{item.firstImg}}" ></image>-->
+<!--            <view class="eee" >-->
+<!--                <view style="margin:5px;font-size:8px"> 标题:{{item.title}}</view>-->
+<!--                <view style="margin:5px;color:red;font-size:6px"> 来源:{{item.source}}</view>-->
+<!--            </view>-->
+<!--        </view>-->
+<!--        <view class="tips1">-->
+<!--            <view wx:if="{{hasMore}}" style="display: flex;flex-direction: row;align-items: center;align-self: center;justify-content: center;">-->
+<!--                <icon type="waiting" size="45"/><text>玩命的加载中...</text></view>-->
+<!--            <view wx:else><text>没有更多内容了</text></view>-->
+<!--        </view>-->
+<!--    </scroll-view>-->
+
 </view>
