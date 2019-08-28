@@ -21,8 +21,11 @@ Component({
     methods:{
         handleGoVideoDetailPage(e){
             let id=e.currentTarget.dataset.id;
+            // wx.navigateTo({
+            //     url: `/pages/videoDetail/index?id=${id}`
+            // })
             wx.navigateTo({
-                url: `/pages/videoDetail/index?id=${id}`
+                url: `/pages/label/index?id=${id}`
             })
         }
     },

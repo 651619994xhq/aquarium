@@ -1,3 +1,5 @@
-<view>
-    this is login page
+<view class="container">
+    <loading>
+        登录中...
+    </loading>
 </view>

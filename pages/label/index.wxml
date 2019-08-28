@@ -1,0 +1,7 @@
+<view class="container">
+<!--   <view w:for="{{data}}" wx:for-item="item" wx:for-index="idx" wx:key="idx">{{item}}</view>-->
+<!--    {{data}}-->
+    242342345
+<v-button bind:click="handleAdd">增加标签</v-button>
+<v-button bind:click="handleDelete">删除标签</v-button>
+</view>

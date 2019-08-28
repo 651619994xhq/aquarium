@@ -9,7 +9,7 @@ Page({
 
     },
     onLoad: function (options) {
-        // console.log('mine page is load')
+        console.log('login page is load')
         app.getUserInfo().then(()=>{
             wx.switchTab({
                 url:'/pages/home/home'

@@ -9,34 +9,20 @@ Page({
         num:10,
         navData:[
             {
-                text: '关注'
+                name: '关注',
+                id:'fllow'
             },
             {
-                text: '推荐'
+                name: '推荐',
+                id:'0'
             },
-            {
-                text: '情感'
-            },
-            {
-                text: '职场'
-            },
-            {
-                text: '育儿'
-            },
-            {
-                text: '纠纷'
-            },
-            {
-                text: '青葱'
-            },
-            {
-                text: '上课'
-            },
-            {
-                text: '下课'
-            }
         ],
         selectList:[
+            {
+                text:'全部',
+                select:true,
+                type:null,
+            },
             {
                 text:'鉴赏讨论',
                 select:false,
@@ -53,13 +39,14 @@ Page({
                 type:3,
             }
         ],
+        selectType:null,
+        selectIndex:0,
+        selectId:'fllow',
         currentTab: 0,
-        navScrollLeft: 0,
         windowHeight:0,
         windowWidth:0,
         scrollHeight:0,
         currentPage: 1,
-        size: 20,
         hasMore:false,
         hasRefesh:false,
         list:[], //
@@ -94,33 +81,39 @@ Page({
                 this.calScrollviewHeight();
             }
         });
-        let [err,data]=await getMyLabel({}); //获取头部标签信息
+        let [err,data]=await getMyLabel(); //获取头部标签信息
         if(err!=null){wx.showToast({title: '系统错误'})};
         this.setData({
-            navData:[...this.data.navData,...data]
+            navData:[{name: '关注', id:'fllow'}, {name: '推荐', id:'0'},...data]
         });
         await this.getPageInfoWithParam({page:this.data.currentPage,label:this.data.navData[this.data.currentTab]['text']});
         await hideLoading();
     },
     //获取页面信息 根据参数
-    async getPageInfoWithParam(param){
-        let [err,data]=await getIndexInfo(param);
-        if(err!=null){wx.showToast({title:'系统错误'})};
+    async getPageInfoWithParam(param={}){
+        await showLoading();
+        let [err,data]=await getIndexInfo({...param,label: this.data.selectId,type:this.data.selectType});
+        if(err!=null){wx.showToast({title:'系统错误'});hideLoading();return };
         this.setData({
             list:[...data.data]
         })
-        console.log(JSON.stringify(this.data.list[0]))
+        await hideLoading();
     },
     onReady(){
       //页面渲染完成
     },
-    onShow(){
+    async onShow(){
       //页面显示
         if(typeof this.getTabBar === 'function' && this.getTabBar()){
             this.getTabBar().setData({
                selected:0
             })
-        }
+        };
+        let [err,data]=await getMyLabel(); //获取头部标签信息
+        if(err!=null){wx.showToast({title: '系统错误'})};
+        this.setData({
+            navData:[{name: '关注', id:'fllow'}, {name: '推荐', id:'0'},...data]
+        });
     },
     onHide(){
       //页面影藏
@@ -195,42 +188,32 @@ Page({
         });
         // console.log(this.navScrollLeft)
         if (this.data.currentTab == cur) {
+            await hideLoading();
             return false;
         } else {
             this.setData({
-                currentTab: cur
+                currentTab: cur,
+                selectId:this.data.navData[cur]['id']
             })
         };
-
+        await this.getPageInfoWithParam({page:1});
+        await hideLoading();
     },
-    handleSelect(e){
+    async handleSelect(e){
+        await showLoading();
         console.log('e==>',e.currentTarget.dataset.current)
         let index=e.currentTarget.dataset.current;
+        this.data.selectList[this.data.selectIndex].select=false;
         this.data.selectList[index].select=!this.data.selectList[index].select;
+        let selectType=this.data.selectList[index].type,
+        selectIndex=index;
         this.setData({
-            selectList:[...this.data.selectList]
-        })
+            selectList:[...this.data.selectList],
+            selectType,
+            selectIndex
+        });
+        await this.getPageInfoWithParam({page:1});
     },
-    handleSelectAll() {
-        console.log('handelSelect is all')
-        this.setData({
-            selectList:[
-                {
-                    text:'鉴赏讨论',
-                    select:true
-                },
-                {
-                    text:'交易信息',
-                    select:true
-                },
-                {
-                    text:'求助达人',
-                    select:true
-                }
-            ]
-        })
-    }
-    ,
     onPullDownRefresh(e){
      console.log('onPullDownRefresh',e)
     },

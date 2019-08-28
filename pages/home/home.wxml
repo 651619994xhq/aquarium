@@ -6,14 +6,14 @@
     <scroll-view scroll-x="true" class="nav" scroll-left="{{navScrollLeft}}" scroll-with-animation="{{true}}">
         <block wx:for="{{navData}}" wx:for-index="idx" wx:for-item="navItem" wx:key="idx">
             <view class="nav-item {{currentTab == idx ?'active':''}}"  data-current="{{idx}}" bindtap="switchNav">
-                <view>{{navItem.text}}</view>
+                <view>{{navItem.name}}</view>
                  <view class="nav-item-bottom" wx-if="{{currentTab == idx}}"></view>
             </view>
         </block>
     </scroll-view>
     </view>
     <view class="all-item row flex-item flex-justify-start">
-        <view class="select-all" bindtap="handleSelectAll">全部</view>
+<!--        <view class="select-all {{selectAll?'active':''}}" bindtap="handleSelectAll" >全部</view>-->
         <view wx:for="{{selectList}}" wx:for-index="idx" wx:for-item="selectItem" wx:key="idx" class="search-title {{selectItem.select?'active':''}}" data-current="{{idx}}" bindtap="handleSelect" >{{selectItem.text}}</view>
     </view>
     <view class="fill-bank"></view>
