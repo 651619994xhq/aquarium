@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/login/index",
     "pages/home/home",
     "pages/mine/index",
     "pages/videoDetail/index",

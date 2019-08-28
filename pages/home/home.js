@@ -14,27 +14,27 @@ Page({
             {
                 text: '推荐'
             },
-            {
-                text: '情感'
-            },
-            {
-                text: '职场'
-            },
-            {
-                text: '育儿'
-            },
-            {
-                text: '纠纷'
-            },
-            {
-                text: '青葱'
-            },
-            {
-                text: '上课'
-            },
-            {
-                text: '下课'
-            }
+            // {
+            //     text: '情感'
+            // },
+            // {
+            //     text: '职场'
+            // },
+            // {
+            //     text: '育儿'
+            // },
+            // {
+            //     text: '纠纷'
+            // },
+            // {
+            //     text: '青葱'
+            // },
+            // {
+            //     text: '上课'
+            // },
+            // {
+            //     text: '下课'
+            // }
         ],
         selectList:[
             {
@@ -54,16 +54,32 @@ Page({
         navScrollLeft: 0,
         windowHeight:0,
         windowWidth:0,
-        list:[],
-        dd:'',
-        hidden:false,
+        scrollHeight:0,
         page: 1,
         size: 20,
         hasMore:true,
-        hasRefesh:false
+        hasRefesh:false,
+        isShow:false,
+        list:[], //
     },
     onLoad: function () {
         this.init();
+    },
+    calScrollviewHeight(){
+        let that=this;
+        var obj = wx.createSelectorQuery();
+            obj.select('.fill-bank').boundingClientRect();
+            obj.exec(function (rect) {
+                //这里减去顶部的高度和底部的高度
+                that.setData({
+                    scrollHeight:that.data.windowHeight-rect[0].height-64
+                })
+                console.log('windowHeight',that.data.windowHeight,' rect-height==>',rect[0].height,' scollHeight==>',that.data.scrollHeight)
+                that.setData({
+                    isShow:true
+                })
+            }) ;
+
     },
     async init(){
         //这个是小程序的bug
@@ -76,17 +92,28 @@ Page({
             success: async (res)=>{
                 // 高度,宽度 单位为px
                 this.setData({windowHeight: res.windowHeight,windowWidth: res.windowWidth})
+                this.calScrollviewHeight();
             }
         });
         let [err,data]=await getMyLabel({}); //获取头部标签信息
         if(err!=null){wx.showToast({title: '系统错误'})};
+        this.setData({
+            navData:[...this.data.navData,...data]
+        });
         await this.getPageInfoWithParam({});
-        // await hideLoading();
+        await hideLoading();
     },
     //获取页面信息 根据参数
     async getPageInfoWithParam(param){
         let [err,data]=await getIndexInfo(param);
         if(err!=null){wx.showToast({title:'系统错误'})};
+        console.log('param==>',data);
+        this.setData({
+            list:[...data.data]
+        })
+        console.log(JSON.stringify(this.data.list[0]))
+
+
     },
     onReady(){
       //页面渲染完成
@@ -111,11 +138,19 @@ Page({
     },
     //加载更多
     loadMore(){
-
+        console.log('loadMore is run')
+        this.setData({
+            hasMore:true,
+            hasRefesh:false,
+        })
     },
     //刷新
     refesh(e){
-
+        console.log('refesh is run')
+        this.setData({
+            hasMore:false,
+            hasRefesh:true,
+        })
     },
     switchNav(event){
         var cur = event.currentTarget.dataset.current;
@@ -164,6 +199,9 @@ Page({
         })
     }
     ,
+    onPullDownRefresh(e){
+     console.log('onPullDownRefresh',e)
+    },
     changeFn(e){
         console.log('e==>',e.detail);
     }

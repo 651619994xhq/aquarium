@@ -1,17 +1,23 @@
+import {BASE_URL} from './config';
 class $http {
-    post(url="",param={}){
+    post(path="",param={}){
+        let token=getApp().globalData.token;
+        token=token?token:'';
+
         return new Promise((resolve, reject)=>{
             wx.request({
-                url, //仅为示例，并非真实的接口地址
+                url:`${BASE_URL}${path}`, //仅为示例，并非真实的接口地址
                 data: param,
                 header: {
                     'content-type': 'application/json', // 默认值
-                    'token':'',
+                    token,
                 },
                 method:'POST',
                 success (res) {
-                    if(res.code===1){
-                        resolve(res.data);
+
+                    if(res.data.code==1){
+                       console.log('data2==>')
+                        resolve(res.data.data);
                         return;
                     };
                     reject(res.msg);
@@ -26,14 +32,16 @@ class $http {
 
     }
 
-    get(url="",param={}){
+    get(path="",param={}){
+        let token=getApp().globalData.token;
+        token=token?token:'';
         return new Promise((resolve, reject)=>{
             wx.request({
-                url, //仅为示例，并非真实的接口地址
+                url:`${BASE_URL}${path}`, //仅为示例，并非真实的接口地址
                 data: param,
                 header: {
                     'content-type': 'application/json', // 默认值
-                    'token':'',
+                    token,
                 },
                 method:'GET',
                 success (res) {

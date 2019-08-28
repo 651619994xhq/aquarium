@@ -93,15 +93,7 @@ page{
     height: 316rpx;
     background: #ffffff;
 }
-
-
-
-/*.tab-box{*/
-/*    background: greenyellow;*/
-/*    padding-top: 80rpx;*/
-/*    height: 100%;*/
-/*    box-sizing: border-box;*/
-/*}*/
-/*.tab-content{*/
-/*    overflow-y: scroll;*/
-/*}*/
+.main-view{
+    width: 100%;
+    /*background: red;*/
+}

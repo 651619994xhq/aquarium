@@ -1,22 +1,22 @@
 <view class="video-info">
     <view class="header row flex-item flex-justify-start">
-        <image  src="{{userImg}}" mode="cover" class="header-img flex"></image>
+        <image  src="{{itemInfo.avatarUrl}}" mode="cover" class="header-img flex"></image>
         <view class="header-info  col flex-item flex-justify">
-            <view class="title1">开心水族馆</view>
-            <view class="title2">12小时前 - 1231浏览</view>
+            <view class="title1">{{itemInfo.nickName}}</view>
+            <view class="title2">{{itemInfo.before}} - {{itemInfo.browse}}浏览</view>
         </view>
         <view class="header-btn">+</view>
     </view>
     <view class="play-module">
-     <image src="http://pic25.nipic.com/20121112/9252150_150552938000_2.jpg" class="play-img"></image>
-     <image src="/image/play-btn.png" class="play-btn" bindtap="handleGoVideoDetailPage"></image>
+     <image src="{{itemInfo.img_url}}" class="play-img"></image>
+     <image src="/image/play-btn.png" class="play-btn" bindtap="handleGoVideoDetailPage" data-id="{{itemInfo.id}}"></image>
     </view>
     <view class="text-moudle">
-        人家把树林搬进鱼缸了，香槟木草缸造景，就是这么有腔调
+        {{itemInfo.title}}
     </view>
     <view class="bottom-moudle row flex-item flex-justify-start">
-        <view class="row flex-item flex-justify-start message"><image src="/image/message.png" class="bottom-img"></image>21</view>
-        <view class="row flex-item flex-justify-start collect"><image src="/image/dis-collect.png" class="bottom-img"></image>314</view>
+        <view class="row flex-item flex-justify-start message"><image src="/image/message.png" class="bottom-img"></image>{{itemInfo.comment}}</view>
+        <view class="row flex-item flex-justify-start collect"><image src="/image/dis-collect.png" class="bottom-img"></image>{{itemInfo.like}}</view>
         <view class="row flex-item flex-justify-start weChat"><image src="/image/weChat.png" class="bottom-img"></image>分享微信好友</view>
     </view>
 </view>
