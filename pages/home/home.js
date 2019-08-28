@@ -14,40 +14,43 @@ Page({
             {
                 text: '推荐'
             },
-            // {
-            //     text: '情感'
-            // },
-            // {
-            //     text: '职场'
-            // },
-            // {
-            //     text: '育儿'
-            // },
-            // {
-            //     text: '纠纷'
-            // },
-            // {
-            //     text: '青葱'
-            // },
-            // {
-            //     text: '上课'
-            // },
-            // {
-            //     text: '下课'
-            // }
+            {
+                text: '情感'
+            },
+            {
+                text: '职场'
+            },
+            {
+                text: '育儿'
+            },
+            {
+                text: '纠纷'
+            },
+            {
+                text: '青葱'
+            },
+            {
+                text: '上课'
+            },
+            {
+                text: '下课'
+            }
         ],
         selectList:[
             {
                 text:'鉴赏讨论',
-                select:false
+                select:false,
+                type:1,
             },
             {
                 text:'交易信息',
-                select:false
+                select:false,
+                type:2,
             },
             {
                 text:'求助达人',
-                select:false
+                select:false,
+                type:3,
             }
         ],
         currentTab: 0,
@@ -55,11 +58,10 @@ Page({
         windowHeight:0,
         windowWidth:0,
         scrollHeight:0,
-        page: 1,
+        currentPage: 1,
         size: 20,
-        hasMore:true,
+        hasMore:false,
         hasRefesh:false,
-        isShow:false,
         list:[], //
     },
     onLoad: function () {
@@ -75,9 +77,6 @@ Page({
                     scrollHeight:that.data.windowHeight-rect[0].height-64
                 })
                 console.log('windowHeight',that.data.windowHeight,' rect-height==>',rect[0].height,' scollHeight==>',that.data.scrollHeight)
-                that.setData({
-                    isShow:true
-                })
             }) ;
 
     },
@@ -100,20 +99,17 @@ Page({
         this.setData({
             navData:[...this.data.navData,...data]
         });
-        await this.getPageInfoWithParam({});
+        await this.getPageInfoWithParam({page:this.data.currentPage,label:this.data.navData[this.data.currentTab]['text']});
         await hideLoading();
     },
     //获取页面信息 根据参数
     async getPageInfoWithParam(param){
         let [err,data]=await getIndexInfo(param);
         if(err!=null){wx.showToast({title:'系统错误'})};
-        console.log('param==>',data);
         this.setData({
             list:[...data.data]
         })
         console.log(JSON.stringify(this.data.list[0]))
-
-
     },
     onReady(){
       //页面渲染完成
@@ -137,31 +133,66 @@ Page({
 
     },
     //加载更多
-    loadMore(){
-        console.log('loadMore is run')
+    loadMore:util.throttle(async function(){
+        await showLoading();
         this.setData({
             hasMore:true,
             hasRefesh:false,
-        })
-    },
+        });
+        let [err,data]=await getIndexInfo({page:this.data.currentPage+1});
+        if(err!=null){wx.showToast('系统异常'); hideLoading();return ;};
+        if(data.data.length==0){
+            setTimeout(async ()=>{
+                this.setData({
+                    hasMore:false
+                })
+                await hideLoading();
+            },1000)
+            return ;
+        };
+        this.setData({
+            currentPage:this.data.currentPage+1,
+            list:[...this.data.list,...data.data],
+            hasMore:false,
+            hasRefesh:false
+        });
+        await hideLoading();
+    }),
     //刷新
-    refesh(e){
-        console.log('refesh is run')
+    refesh:util.throttle(async function(){
+        await showLoading();
         this.setData({
             hasMore:false,
             hasRefesh:true,
-        })
-    },
-    switchNav(event){
+        });
+        let [err,data]=await getIndexInfo({page:1});
+        if(JSON.stringify(data.data)==JSON.stringify(this.data.list)){
+            setTimeout(async ()=>{
+                this.setData({hasMore:false,hasRefesh:false,});
+                await hideLoading();
+            },1000);
+           return ;
+        };
+        if(err!=null){wx.showToast('系统异常'); hideLoading();return ;};
+        setTimeout(async ()=>{
+            this.setData({
+                currentPage:1,
+                list:[...data.data],
+                hasMore:false,
+                hasRefesh:false
+            });
+            await hideLoading();
+        },2000)
+    }),
+    async switchNav(event){
+        await showLoading();
         var cur = event.currentTarget.dataset.current;
-        console.log('cur==>',cur);
-
         //每个tab选项宽度占1/6
         var singleNavWidth = this.data.windowWidth / 6;
         //tab选项居中
         this.setData({
             navScrollLeft: (cur - 2) * singleNavWidth
-        })
+        });
         // console.log(this.navScrollLeft)
         if (this.data.currentTab == cur) {
             return false;
@@ -169,7 +200,8 @@ Page({
             this.setData({
                 currentTab: cur
             })
-        }
+        };
+
     },
     handleSelect(e){
         console.log('e==>',e.currentTarget.dataset.current)

@@ -17,19 +17,15 @@
         <view wx:for="{{selectList}}" wx:for-index="idx" wx:for-item="selectItem" wx:key="idx" class="search-title {{selectItem.select?'active':''}}" data-current="{{idx}}" bindtap="handleSelect" >{{selectItem.text}}</view>
     </view>
     <view class="fill-bank"></view>
-<!--    <i-video test="{{test}}" bind:myevent="changeFn"></i-video>-->
-<!--    <loading hidden="{{hidden}}" bindchange="loadingChange">-->
-<!--        加载中...-->
-<!--    </loading>-->
-    <scroll-view scroll-y="true" style="height:{{scrollHeight}}px" bindscrolltolower="loadMore" bindscrolltoupper="refesh" class="main-view">
+    <scroll-view scroll-y="true" style="height:{{scrollHeight}}px" bindscrolltolower="loadMore" bindscrolltoupper="refesh" upper-threshold="-50" class="main-view">
         <view wx:if="{{hasRefesh}}" style="display: flex;flex-direction: row;align-items: center;align-self: center;justify-content: center;">
-            <icon type="waiting" size="45"/><text>刷新中...</text></view>
-        <view wx:else style="display:none" ><text></text></view>
+            <icon type="waiting" size="20"/><text>刷新中...</text></view>
+<!--        <view wx:else style="display:none" ><text></text></view>-->
             <i-video itemInfo="{{item}}" bind:myevent="changeFn" wx:for="{{list}}" wx:for-item="item" wx:for-index="idx" wx:key="idx"></i-video>
         <view class="tips1">
             <view wx:if="{{hasMore}}" style="display: flex;flex-direction: row;align-items: center;align-self: center;justify-content: center;">
-                <icon type="waiting" size="45"/><text>玩命的加载中...</text></view>
-            <view wx:else><text>没有更多内容了</text></view>
+                <icon type="waiting" size="20"/><text>玩命的加载中...</text></view>
+            <view wx:else class="center-text"><text>没有更多内容了</text></view>
         </view>
     </scroll-view>
 

@@ -77,7 +77,6 @@ export const showLoading = () => {
             title: '加载中...',
             mask: true,
             success (res) {
-                console.log('显示loading')
                 resolve(res)
             },
             fail (err) {
