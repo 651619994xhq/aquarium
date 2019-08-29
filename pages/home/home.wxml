@@ -1,35 +1,50 @@
 <!--logs.wxml-->
-<view class="container">
 <wxs src="../../filter/filter.wxs" module="filter"></wxs>
-<view class="header">
-    <view class="title center-text">水族达人</view>
-    <scroll-view scroll-x="true" class="nav" scroll-left="{{navScrollLeft}}" scroll-with-animation="{{true}}">
-        <block wx:for="{{navData}}" wx:for-index="idx" wx:for-item="navItem" wx:key="idx">
-            <view class="nav-item {{currentTab == idx ?'active':''}}"  data-current="{{idx}}" bindtap="switchNav">
-                <view>{{navItem.name}}</view>
-                 <view class="nav-item-bottom" wx-if="{{currentTab == idx}}"></view>
-            </view>
-        </block>
-    </scroll-view>
-    <navigator class="hbo" url="/pages/label/index"><image src="/image/hbo.png"></image></navigator>
-<!--    <view class="hbo"></view>-->
-    </view>
-    <view class="all-item row flex-item flex-justify-start">
-<!--        <view class="select-all {{selectAll?'active':''}}" bindtap="handleSelectAll" >全部</view>-->
-        <view wx:for="{{selectList}}" wx:for-index="idx" wx:for-item="selectItem" wx:key="idx" class="search-title {{selectItem.select?'active':''}}" data-current="{{idx}}" bindtap="handleSelect" >{{selectItem.text}}</view>
-    </view>
-    <view class="fill-bank"></view>
-    <scroll-view scroll-y="true" style="height:{{scrollHeight}}px" bindscrolltolower="loadMore" bindscrolltoupper="refesh" upper-threshold="-50" class="main-view">
-<!--    <scroll-view scroll-y="true" style="height:{{scrollHeight}}px" bindscrolltolower="loadMore" class="main-view">-->
-        <view wx:if="{{hasRefesh}}" style="display: flex;flex-direction: row;align-items: center;align-self: center;justify-content: center;">
-        <icon type="waiting" size="20"/><text>刷新中...</text></view>
-<!--        <view wx:else style="display:none" ><text></text></view>-->
-        <i-video itemInfo="{{item}}" bind:myevent="changeFn" wx:for="{{list}}" wx:for-item="item" wx:for-index="idx" wx:key="idx"></i-video>
-        <view class="tips1">
-            <view wx:if="{{hasMore}}" style="display: flex;flex-direction: row;align-items: center;align-self: center;justify-content: center;">
-                <icon type="waiting" size="20"/><text>玩命的加载中...</text></view>
-            <view wx:else class="center-text"><text>没有更多内容了</text></view>
+<view class="container">
+    <view class="header-moudle">
+         <view class="header">
+            <view class="title center-text">水族达人</view>
+            <scroll-view scroll-x="true" class="nav" scroll-left="{{navScrollLeft}}" scroll-with-animation="{{true}}">
+                <block wx:for="{{navData}}" wx:for-index="idx" wx:for-item="navItem" wx:key="idx">
+                    <view class="nav-item {{currentTab == idx ?'active':''}}"  data-current="{{idx}}" bindtap="switchNav">
+                        <view>{{navItem.name}}</view>
+                         <view class="nav-item-bottom" wx-if="{{currentTab == idx}}"></view>
+                    </view>
+                </block>
+            </scroll-view>
+            <navigator class="hbo" url="/pages/label/index"><image src="/image/hbo.png"></image></navigator>
         </view>
-    </scroll-view>
+        <view class="all-item row flex-item flex-justify-start">
+            <view wx:for="{{selectList}}" wx:for-index="idx" wx:for-item="selectItem" wx:key="idx" class="search-title {{selectItem.select?'active':''}}" data-current="{{idx}}" bindtap="handleSelect" >{{selectItem.text}}</view>
+        </view>
+    </view>
+    <view class="detail-list">
+        <scroll-view bindscroll='onPageScroll' style="height: 100%;overflow: hidden" scroll-y="true" enable-back-to-top='true'>
+<!--            刷新图标-->
+            <block wx:if="{{list.length>0}}">
+            <view wx:if="{{hasRefesh}}" style="display: flex;flex-direction: row;align-items: center;align-self: center;justify-content: center;">
+                <icon type="waiting" size="20"/><text>刷新中...</text>
+            </view>
+            </block>
+<!--            内容区域-->
+            <view class="detail-box">
+                <view class="noData" wx:if="{{list.length === 0}}">没有数据</view>
+                <block wx:else>
+                <i-video itemInfo="{{item}}" wx:for="{{list}}" wx:for-item="item" wx:for-index="idx" wx:key="idx"></i-video>
+                </block>
+            </view>
+<!--          加载更多-->
+            <block wx:if="{{list.length > 0}}">
+            <view wx:if="{{hasMore}}" style="display: flex;flex-direction: row;align-items: center;align-self: center;justify-content: center;">
+                <icon type="waiting" size="20"/><text>玩命的加载中...</text>
+            </view>
+            <view wx:else class="center-text"><text>没有更多内容了</text></view>
+            </block>
 
+        </scroll-view>
+<!--        跳转到顶部-->
+        <view class='backTop {{backTop?"":"hide"}}' bindtap='backTopHandle'>
+            <image src='/image/backTop2.png'></image>
+        </view>
+    </view>
 </view>

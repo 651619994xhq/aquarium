@@ -4,7 +4,7 @@
     bottom: 0;
     left: 0;
     right: 0;
-    height: 60px;
+    height: 120rpx;
     background: white;
     padding-bottom: env(safe-area-inset-bottom);
     overflow: hidden;
@@ -36,8 +36,8 @@
 
 
 .tab-bar-item cover-image {
-    width: 28px;
-    height: 36px;
+    width: 56rpx;
+    height: 72rpx;
 }
 
 .tab-bar-item cover-view {
