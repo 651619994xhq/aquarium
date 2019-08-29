@@ -9,6 +9,7 @@
     position: fixed;
     top: 0;
     left: 0;
+    z-index: 1;
 }
 .title{
   color: white;
@@ -35,7 +36,7 @@ page{
     position: absolute;
     left: 0;
     bottom: 0;
-    z-index: 99;
+    z-index: 1;
 }
 .nav-item {
     width: 125rpx;
@@ -66,7 +67,24 @@ page{
     position: fixed;
     top:216rpx;
     left: 0;
+    z-index: 1;
     background: #ffffff;
+}
+
+.hbo{
+    position: absolute;
+    bottom: 24rpx;
+    right: 20rpx;
+    width: 32rpx;
+    height: 50rpx;
+    background: #67D8F0;
+    z-index: 2;
+}
+.hbo image{
+    margin-top: 9rpx;
+    display: block;
+    width: 32rpx;
+    height: 32rpx;
 }
 /*.select-all{*/
 /*    width:96rpx;*/

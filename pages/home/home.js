@@ -86,13 +86,13 @@ Page({
         this.setData({
             navData:[{name: '关注', id:'fllow'}, {name: '推荐', id:'0'},...data]
         });
-        await this.getPageInfoWithParam({page:this.data.currentPage,label:this.data.navData[this.data.currentTab]['text']});
+        await this.getPageInfoWithParam({page:1});
         await hideLoading();
     },
     //获取页面信息 根据参数
     async getPageInfoWithParam(param={}){
         await showLoading();
-        let [err,data]=await getIndexInfo({...param,label: this.data.selectId,type:this.data.selectType});
+        let [err,data]=await getIndexInfo({label: this.data.selectId,type:this.data.selectType,...param});
         if(err!=null){wx.showToast({title:'系统错误'});hideLoading();return };
         this.setData({
             list:[...data.data]
@@ -111,8 +111,9 @@ Page({
         };
         let [err,data]=await getMyLabel(); //获取头部标签信息
         if(err!=null){wx.showToast({title: '系统错误'})};
+        let navData=[{name: '关注', id:'fllow'}, {name: '推荐', id:'0'},...data];
         this.setData({
-            navData:[{name: '关注', id:'fllow'}, {name: '推荐', id:'0'},...data]
+            navData,
         });
     },
     onHide(){

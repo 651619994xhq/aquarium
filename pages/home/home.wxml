@@ -11,6 +11,8 @@
             </view>
         </block>
     </scroll-view>
+    <navigator class="hbo" url="/pages/label/index"><image src="/image/hbo.png"></image></navigator>
+<!--    <view class="hbo"></view>-->
     </view>
     <view class="all-item row flex-item flex-justify-start">
 <!--        <view class="select-all {{selectAll?'active':''}}" bindtap="handleSelectAll" >全部</view>-->
