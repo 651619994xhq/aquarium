@@ -6,7 +6,9 @@
     "pages/videoDetail/index",
     "pages/label/index",
     "pages/index/index",
-    "pages/logs/logs"
+    "pages/logs/logs",
+    "pages/test/index"
+
   ],
   "window": {
     "backgroundTextStyle": "light",

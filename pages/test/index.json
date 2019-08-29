@@ -4,8 +4,8 @@
   },
   "navigationBarBackgroundColor": "#008AFF",
   "navigationBarTextStyle": "white",
-  "navigationBarTitleText": "首页",
+  "navigationBarTitleText": "test",
   "backgroundColor": "white",
   "backgroundTextStyle": "light",
-  "navigationStyle": "custom"
+  "enablePullDownRefresh": true
 }

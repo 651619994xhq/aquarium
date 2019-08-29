@@ -164,7 +164,7 @@ Page({
             setTimeout(async ()=>{
                 this.setData({hasMore:false,hasRefesh:false,});
                 await hideLoading();
-            },1000);
+            },1500);
            return ;
         };
         if(err!=null){wx.showToast('系统异常'); hideLoading();return ;};
@@ -215,9 +215,35 @@ Page({
         });
         await this.getPageInfoWithParam({page:1});
     },
-    onPullDownRefresh(e){
-     console.log('onPullDownRefresh',e)
-    },
+    //用这个刷新效果好一点 但是不能在scroll-view 不触发 暂时废弃
+    // async onPullDownRefresh(e){
+    //  console.log('onPullDownRefresh',e)
+    //     await showLoading();
+    //     this.setData({
+    //         hasMore:false,
+    //         hasRefesh:true,
+    //     });
+    //     let [err,data]=await getIndexInfo({page:1});
+    //     if(JSON.stringify(data.data)==JSON.stringify(this.data.list)){
+    //         setTimeout(async ()=>{
+    //             this.setData({hasMore:false,hasRefesh:false,});
+    //             await hideLoading();
+    //             wx.stopPullDownRefresh()
+    //         },1000);
+    //         return ;
+    //     };
+    //     if(err!=null){wx.showToast('系统异常'); hideLoading();return ;};
+    //     setTimeout(async ()=>{
+    //         this.setData({
+    //             currentPage:1,
+    //             list:[...data.data],
+    //             hasMore:false,
+    //             hasRefesh:false
+    //         });
+    //         await hideLoading();
+    //         wx.stopPullDownRefresh()
+    //     },2000)
+    // },
     changeFn(e){
         console.log('e==>',e.detail);
     }
